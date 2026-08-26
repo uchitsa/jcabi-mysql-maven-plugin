@@ -13,14 +13,15 @@ import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 import javax.sql.DataSource;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test case for {@link Instances}.
+ * @since 0.6
  * @checkstyle ClassDataAbstractionCoupling (500 lines)
  * @checkstyle MultipleStringLiterals (500 lines)
- * @since 0.6
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 final class InstancesTest {
@@ -322,7 +323,8 @@ final class InstancesTest {
         );
         MatcherAssert.assertThat(
             "Instance reusedExistingDatabase should be false.",
-            !instances.reusedExistingDatabase()
+            !instances.reusedExistingDatabase(),
+            Matchers.is(true)
         );
         final DataSource source = new UrlSource(
             String.format(
@@ -374,7 +376,8 @@ final class InstancesTest {
         );
         MatcherAssert.assertThat(
             "Instance reusedExistingDatabase should be false.",
-            !instances.reusedExistingDatabase()
+            !instances.reusedExistingDatabase(),
+            Matchers.is(true)
         );
         final DataSource source = new UrlSource(
             String.format(
@@ -431,7 +434,8 @@ final class InstancesTest {
         );
         MatcherAssert.assertThat(
             "Instance reusedExistingDatabase should be true.",
-            instances.reusedExistingDatabase()
+            instances.reusedExistingDatabase(),
+            Matchers.is(true)
         );
         do {
             TimeUnit.SECONDS.sleep(InstancesTest.SLEEP_SECONDS);
